@@ -8,7 +8,7 @@
  * 
  *
  * Command line arguments:
- *	 <number> - the number to parse.
+ *   <number> - the number to parse.
  *   <base> - the base that number is in.
  *
  * Author: E. Chris Pedro
@@ -23,7 +23,7 @@
 /*
  * decimal_to_binary - Converts a decimal number to a binary string.  Note that
  *                     the binary number is passed back as a character string.
- *       							 This function calls malloc to allocate memory for the
+ *                     This function calls malloc to allocate memory for the
  *                     string that is returned.
  * @n - the number to convert.
  * Return the binary string of the number n.
@@ -32,7 +32,7 @@ char *decimal_to_binary(unsigned long n)
 {
   int i, c, size = (sizeof(unsigned long) * 8);
   char *bin;
-	
+  
   bin = (char *)malloc(size + 1);
   if (bin == NULL)
     exit(EXIT_FAILURE);
@@ -48,7 +48,7 @@ char *decimal_to_binary(unsigned long n)
  * strip_leading_zeros - strips leading zeros from a character string of binary
  *                       digits.  Function asumes that the string is binary
  *                       digits only, and is properly null terminated.
- *       							   This function calls malloc to allocate memory for the
+ *                       This function calls malloc to allocate memory for the
  *                       string that is returned.
  * @str - the binary text string to stip.
  * @len - the length of the string.
@@ -56,29 +56,29 @@ char *decimal_to_binary(unsigned long n)
  */
 char *strip_leading_zeros(char *str, int len)
 {
-	int i, j;
-	char *new_str;
-	
-	/* find index of first 1, if it exists */
-	for (i = 0; i < len && str[i] != '\0'; ++i)
-		if (str[i] == '1')
-			break;
-	
-	/* case for no leading zeros */
-	if (str[i] == '\0')
-	{
-		new_str = (char *)malloc(2);
-		strncpy(new_str, "0", 1);
-		
-		return new_str;
-	}
-	
-	/* copy remaining characters from str to new_str */
-	new_str = (char *)malloc(len - i);
-	for (j = 0; i < len; ++i, ++j)
-		new_str[j] = str[i];
-	
-	return new_str;
+  int i, j;
+  char *new_str;
+  
+  /* find index of first 1, if it exists */
+  for (i = 0; i < len && str[i] != '\0'; ++i)
+    if (str[i] == '1')
+      break;
+  
+  /* case for no leading zeros */
+  if (str[i] == '\0')
+  {
+    new_str = (char *)malloc(2);
+    strncpy(new_str, "0", 1);
+    
+    return new_str;
+  }
+  
+  /* copy remaining characters from str to new_str */
+  new_str = (char *)malloc(len - i);
+  for (j = 0; i < len; ++i, ++j)
+    new_str[j] = str[i];
+  
+  return new_str;
 }
 
 /*

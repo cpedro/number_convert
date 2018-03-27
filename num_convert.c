@@ -102,7 +102,7 @@ void print_number(char *str, int base)
   printf("Dec:\t%lu\nOct:\t%#lo\nHex:\t%#lx\nBin:\t%s\n", n, n, n, bin_s);
 
   free(bin);
-  /* free(bin_s); */
+  free(bin_s);
   bin_s = NULL;
   bin = NULL;
 }

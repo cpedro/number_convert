@@ -35,7 +35,7 @@ char *decimal_to_binary(unsigned long n)
   
   bin = (char *)malloc(size + 1);
   if (bin == NULL)
-    exit(EXIT_FAILURE);
+    return NULL;
  
   for (c = --size, i = 0; c >= 0; --c, ++i)
     bin[i] = ((n >> c) & 1) ? '1' : '0';
@@ -64,17 +64,23 @@ char *strip_leading_zeros(char *str, int len)
     if (str[i] == '1')
       break;
   
-  /* case for no leading zeros */
+  /* case for all zeros */
   if (str[i] == '\0')
   {
     new_str = (char *)malloc(2);
+    if (new_str == NULL)
+      return NULL;
+    
     strncpy(new_str, "0", 1);
     
     return new_str;
   }
   
-  /* copy remaining characters from str to new_str */
   new_str = (char *)malloc(len - i);
+  if (new_str == NULL)
+    return NULL;
+  
+  /* copy remaining characters from str to new_str */
   for (j = 0; i < len; ++i, ++j)
     new_str[j] = str[i];
   

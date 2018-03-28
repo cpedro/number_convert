@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#define ULONG_BITS (sizeof(unsigned long) * 8)
+
 
 /*
  * decimal_to_binary - Converts a decimal number to a binary string.  Note that
@@ -30,13 +32,14 @@
  */
 char *decimal_to_binary(unsigned long n)
 {
-  int i, c, size = (sizeof(unsigned long) * 8);
+  int i, c, size = ULONG_BITS;
   char *bin;
   
   bin = (char *)malloc(size + 1);
   if (bin == NULL)
     return NULL;
  
+  /* Use bitwise operators to convert bits of the number to a string */
   for (c = --size, i = 0; c >= 0; --c, ++i)
     bin[i] = ((n >> c) & 1) ? '1' : '0';
   bin[i] = '\0';
@@ -51,12 +54,11 @@ char *decimal_to_binary(unsigned long n)
  *                       This function calls malloc to allocate memory for the
  *                       string that is returned.
  * @str - the binary text string to stip.
- * @len - the length of the string.
  * Return the same binary string with all leading zeros stripped off.
  */
-char *strip_leading_zeros(char *str, int len)
+char *strip_leading_zeros(char *str)
 {
-  int i, j;
+  int i, j, len = strlen(str) + 1;
   char *new_str;
   
   /* find index of first 1, if it exists */
@@ -64,8 +66,8 @@ char *strip_leading_zeros(char *str, int len)
     if (str[i] == '1')
       break;
   
-  /* case for all zeros */
-  if (str[i] == '\0')
+  /* case for all zeros, also check for no null termination */
+  if (i == len || str[i] == '\0')
   {
     new_str = (char *)malloc(2);
     if (new_str == NULL)
@@ -99,11 +101,10 @@ void print_number(char *str, int base)
 {
   unsigned long n;
   char *bin, *bin_s;
-  int len = (sizeof(unsigned long) * 8) + 1;
 
   n = strtoul(str, 0, base);
   bin = decimal_to_binary(n);
-  bin_s = strip_leading_zeros(bin, len);
+  bin_s = strip_leading_zeros(bin);
 
   printf("Dec:\t%lu\nOct:\t%#lo\nHex:\t%#lx\nBin:\t%s\n", n, n, n, bin_s);
 

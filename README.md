@@ -1,4 +1,4 @@
-## Number Convert
+# Number Convert
 
 Standalone C program that takes number from various bases and converts them to 
 other bases:

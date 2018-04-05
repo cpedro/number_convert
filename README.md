@@ -1,5 +1,4 @@
-Number Convert
-==============
+## Number Convert
 
 Standalone C program that takes number from various bases and converts them to 
 other bases:
@@ -14,8 +13,8 @@ base can be any base.
 This program was written mainly for a bit of practice in C, but I have used it
 numerous times to convert numbers from one base to another.
 
-Compiling and running
-=====================
+## Compiling and running
+
 ```
 $ gcc num_convert.c -o num_convert
 $ ./num_convert 10 10
